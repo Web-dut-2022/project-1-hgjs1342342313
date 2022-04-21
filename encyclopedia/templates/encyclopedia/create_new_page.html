@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    Encyclopedia
+{% endblock %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new_entry</title>
+</head>
+<body>
+       <form action="/new_entry/" method="post">
+           <br>{% csrf_token %} </br>
+           <input  type="text" name="title" placeholder="add a title" >
+           <input  type="text" name="content" placeholder="add content" >
+           <button type="submit" >Submit</button>
+       </form>
+
+</body>
+</html>
+{% endblock %}
