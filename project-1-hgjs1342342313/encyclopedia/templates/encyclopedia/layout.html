@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+       <title>{% block title %}{% endblock %}</title>
+        <title>WikePedia</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+    <script>
+        function page() {
+            var pages = ["CSS/", "Django/", "Git/", "HTML/", "Python/"]
+            var num = Math.random()
+            num = Math.ceil(num * 100) % 5
+            return window.location.href = '/wiki/'+pages[num]
+        }
+    </script>
+        <style>
+            .SearchBox{
+                height: 30px;
+                width: 150px;
+            }
+            .SearchBtn{
+                height: 30px;
+                width: 60px;
+                background-color: skyblue;
+            }
+            .h2{
+                margin-left: 15px;
+            }
+        </style>
+        <div class="row">
+            <div class="sidebar col-lg-2 col-md-3">
+                <h2 class="h2">Wiki</h2>
+                <form action="/search_item/" method="post">
+                    <br>{% csrf_token %} </br>
+                    <input class="SearchBox" type="text" name="name" placeholder="Search Encyclopedia" >
+                    <button type="submit" class="SearchBtn" >Search</button>
+                </form>
+                <div>
+                    <a href="{% url 'index' %}">Home</a>
+                </div>
+                <div>
+                    <a href="create_new_page">Create New Page</a>
+                </div>
+                <div>
+                    <a href="#" onclick="page()">
+                        Random Page
+                    </a>
+                </div>
+                {% block nav %}
+                {% endblock %}
+            </div>
+            <div class="main col-lg-10 col-md-9">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
